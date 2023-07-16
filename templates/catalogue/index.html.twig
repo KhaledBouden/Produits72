@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CatalogueController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .card-link { text-decoration: none;}
+    .green-text {color: green;}
+</style>
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        {% for produit in produits %}
+        <div class="col" >
+            <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="card-link">
+          <div class="card shadow-sm">
+          <img height = "450"src="{{vich_uploader_asset(produit, 'imageFile')}}" alt="">
+
+            <div class="card-body">
+              <p class="card-text">{{produit.titre}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  
+                </div>
+                <small class="green-text">en stock</small>
+              </div>
+            </div>
+          </div>
+          </a>
+        </div>
+        {% endfor %}
+        
+       
+      </div>
+    </div>
+  </div>
+{% endblock %}

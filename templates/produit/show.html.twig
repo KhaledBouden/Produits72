@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+    <div class="d-flex">
+        <div class="p-2">
+            <img src="{{ vich_uploader_asset(produit, 'imageFile') }}" style="max-width: 75%;" alt="Product Image">
+        </div>
+        <div class="p-2">
+            <h1>{{ produit.titre }}</h1>
+
+            <table class="table">
+                <tbody>
+                    
+                    <tr>
+                        <th>Titre</th>
+                        <td>{{ produit.titre }}</td>
+                    </tr>
+                    <tr>
+                        <th>Marque</th>
+                        <td>{{ produit.marque }}</td>
+                    </tr>
+                    <tr>
+                        <th>Type</th>
+                        <td>{{ produit.type }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ produit.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prix</th>
+                        <td>{{ produit.prix }} DT</td>
+                    </tr>
+                    <tr>
+                        <th>Volume</th>
+                        <td>{{ produit.volume }}</td>
+                    </tr>
+                    <tr>
+                        <th>Quantity</th>
+                        <td>{{ produit.quantity }}</td>
+                    </tr>
+                    <tr>
+                        <th><a href="{{ path('app_catalogue') }}" class="btn btn-primary"><i class="bi bi-arrow-left"></i>Retour</a></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    
+
+    
+{% endblock %}

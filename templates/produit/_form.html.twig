@@ -1,0 +1,39 @@
+{{ form_start(form) }}
+<div class="custom-form">
+    <div class="form-group p-2">
+        <label for="{{ form.titre.vars.id }}">Titre:</label>
+        {{ form_widget(form.titre, {'attr': {'class': 'form-control form-control-sm', 'style': 'width: 600px'}}) }}
+    </div>
+    <div class="form-group p-2">
+        <label for="{{ form.marque.vars.id }}">Marque:</label>
+        {{ form_widget(form.marque, {'attr': {'class': 'form-control form-control-sm', 'style': 'width: 600px'}}) }}
+    </div>
+    <div class="form-group p-2">
+        <label for="{{ form.type.vars.id }}">Type:</label>
+        {{ form_widget(form.type, {'attr': {'class': 'form-control form-control-sm', 'style': 'width: 600px'}}) }}
+    </div>
+    <div class="form-group p-2">
+        <label for="{{ form.description.vars.id }}">Description:</label>
+        {{ form_widget(form.description, {'attr': {'class': 'form-control form-control-sm', 'style': 'width: 600px'}}) }}
+    </div>
+    <div class="form-group p-2">
+        <label for="{{ form.prix.vars.id }}">Prix:</label>
+        {{ form_widget(form.prix, {'attr': {'class': 'form-control form-control-sm', 'style': 'width: 600px'}}) }}
+    </div>
+    <div class="form-group p-2">
+        <label for="{{ form.volume.vars.id }}">Volume:</label>
+        {{ form_widget(form.volume, {'attr': {'class': 'form-control form-control-sm', 'style': 'width: 600px'}}) }}
+    </div>
+    <div class="form-group p-2">
+        <label for="{{ form.quantity.vars.id }}">Quantity:</label>
+        {{ form_widget(form.quantity, {'attr': {'class': 'form-control form-control-sm', 'style': 'width: 600px'}}) }}
+        </div>
+        <div class="p-2">
+        {{form_row(form.imageFile)}}
+        </div>
+   <div class="py-3">
+    
+        <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+    
+</div>
+{{ form_end(form) }}

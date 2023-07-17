@@ -8,6 +8,7 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     .card-link { text-decoration: none;}
     .green-text {color: green;}
+    .red-text {color: red;}
 </style>
 
 <div class="album py-5 bg-body-tertiary">
@@ -21,13 +22,18 @@
           <div class="card shadow-sm">
           <img height = "450"src="{{vich_uploader_asset(produit, 'imageFile')}}" alt="">
 
-            <div class="card-body">
-              <p class="card-text">{{produit.titre}}</p>
+            <div class="card-body" height>
+              <h4 class="card-text">{{produit.titre}}</h4>
+              <h6 class="card-text">{{produit.prix}} TND<h6/>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   
                 </div>
+                {% if produit.quantity > 0 %} 
                 <small class="green-text">en stock</small>
+                {% else %}
+                <small class="red-text"> pas en stock</small>
+                {% endif %}
               </div>
             </div>
           </div>

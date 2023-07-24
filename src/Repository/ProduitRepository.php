@@ -45,4 +45,9 @@ class ProduitRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function findById(int $id): ?Produit
+{
+    return $this->find($id);
+}
 }

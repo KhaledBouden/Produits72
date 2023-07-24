@@ -10,7 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Security;
 #[Route('/produit')]
 class ProduitController extends AbstractController
 {
@@ -78,4 +80,27 @@ class ProduitController extends AbstractController
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
     }
+    #[Route('/{id}',name:'app_add_to_cart',methods:['GET', 'POST'])]
+    public function addToCart(Produit $produit, SessionInterface $session, Security $security): RedirectResponse
+{
+    // Get the currently authenticated user (assuming you have a User entity and UserProvider)
+    $user = $security->getUser();
+
+    if (!$user) {
+        // Handle the case where the user is not authenticated (optional)
+        return $this->redirectToRoute('app_login'); // Redirect to login page, for example
+    }
+
+    // Get the user's current cart (panier) from the session or create a new empty array
+    $panier = $session->get('panier', []);
+
+    // Add the $produit to the cart array
+    $panier[] = $produit;
+    
+    // Store the updated cart back into the session
+    $session->set('panier', $panier);
+
+    // Redirect back to the product page or any other desired route
+    return $this->redirectToRoute('app_produit_show', ['id' => $produit->getId()]);
+}
 }

@@ -20,6 +20,8 @@ class ProduitType extends AbstractType
             ->add('prix')
             ->add('volume')
             ->add('quantity')
+            ->add('fiche')
+            ->add('soldWith')
             ->add('imageFile',VichImageType::class,[
                 'required' => false, 
                 'label' => 'Image du produit',

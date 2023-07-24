@@ -1,14 +1,22 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}Produit{% endblock %}
 
 {% block body %}
-    <div class="d-flex">
-        <div class="p-2">
+    
+    <div class="container py-4">
+    <div class="d-flex d-flex justify-content-center align-items-center">
+        <div class="p-2 ">
             <img height="450"src="{{ vich_uploader_asset(produit, 'imageFile') }}" style="max-width: 100%;" alt="Product Image">
         </div>
         <div class="p-2">
             <h1>{{ produit.titre }}</h1>
+             {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
 
             <table class="table">
                 <tbody>
@@ -25,10 +33,7 @@
                         <th>Type</th>
                         <td>{{ produit.type }}</td>
                     </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td>{{ produit.description }}</td>
-                    </tr>
+                    
                     <tr>
                         <th>Prix</th>
                         <td>{{ produit.prix }} DT</td>
@@ -40,13 +45,37 @@
                     
                     <tr>
                         <th><a href="{{ path('app_catalogue') }}" class="btn btn-primary px-1"><i class="bi bi-arrow-left "></i>Retour</a></th>
-                        <td><a class="btn btn-primary px-1"><i class="bi bi-cart-plus"></i>Ajouter au panier</a></td>
+                        <td><a href="{{path('add_to_cart',{'id': produit.id})}}"class="btn btn-primary px-1"><i class="bi bi-cart-plus"></i>Ajouter au panier</a></td>
                     </tr>
                 </tbody>
             </table>
+            
+        </div>
+        
+    </div>
+   
+    <div class="h-100 p-5 bg-body-tertiary border rounded-3 mb-4 container">
+           <h3>Details:</h3>
+    <p class="flex-grow-1 overflow-auto" >{{produit.description}}</p>
+        </div>
+        
+        <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3 container">
+          <h2>Fiche technique</h2>
+          <p class="flex-grow-1 overflow-auto">{{produit.fiche}}</p>
+          
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+          <h2>Vendu avec le produit</h2>
+          <p class="flex-grow-1 overflow-auto">{{produit.soldWith}}</p>
+        </div>
+      </div>
+    </div>
         </div>
     </div>
-
     
 
     

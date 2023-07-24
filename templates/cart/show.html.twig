@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block body %}
+    
+    {% if produits|length > 0 %}
+    
+    <div class='p-4'>
+    <h1>Votre Panier</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th>Prix</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produit in produits %}
+                    <tr>
+                        <td>
+                            {{ produit.titre }}
+                        </td>
+                        <td>
+                            <form action="{{ path('update_cart', {'id': produit.id}) }}" method="post">
+                                <button type="submit" class="btn btn-sm btn-secondary" name="action" value="decrease">-</button>
+                                <span>{{ cart[produit.id] }}</span>
+                                <button type="submit" class="btn btn-sm btn-primary" name="action" value="increase">+</button>
+                            </form>
+                        </td>
+                        <td>
+                            {{ produit.prix }} TND
+                        </td>
+                        <td>
+                            {{ produit.prix * cart[produit.id] }} TND
+                        </td>
+                       
+                    </tr>
+                {% endfor %}
+                <tr>
+            <td colspan="3" class="text-end"><strong>Total:</strong></td>
+            <td><strong>{{ totalAmount }} TND</strong></td>
+        </tr>
+            </tbody>
+        </table>
+        <div>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+{% endblock %}

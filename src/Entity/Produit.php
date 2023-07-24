@@ -49,6 +49,12 @@ class Produit
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\Column(length: 5000)]
+    private ?string $fiche = null;
+
+    #[ORM\Column(length: 5000, nullable: true)]
+    private ?string $soldWith = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,6 +177,30 @@ class Produit
     public function getImageSize(): ?int
     {
         return $this->imageSize;
+    }
+
+    public function getFiche(): ?string
+    {
+        return $this->fiche;
+    }
+
+    public function setFiche(string $fiche): static
+    {
+        $this->fiche = $fiche;
+
+        return $this;
+    }
+
+    public function getSoldWith(): ?string
+    {
+        return $this->soldWith;
+    }
+
+    public function setSoldWith(?string $soldWith): static
+    {
+        $this->soldWith = $soldWith;
+
+        return $this;
     }
 }
 

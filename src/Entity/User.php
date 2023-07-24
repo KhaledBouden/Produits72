@@ -50,6 +50,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?int $points = null;
 
+    private array $panier = [];
+
     public function __construct(){
         $this->setRoles(['ROLE_USER']);
     }
@@ -204,6 +206,17 @@ public function getSalt(): ?string
     public function setPoints(?int $points): static
     {
         $this->points = $points;
+
+        return $this;
+    }
+    public function getPanier() : array {
+        return $this->panier;
+    }
+
+    public function setPanier(array $panier): static
+    {   
+
+        $this->panier = $panier;
 
         return $this;
     }

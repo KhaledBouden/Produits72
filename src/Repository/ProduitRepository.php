@@ -46,8 +46,33 @@ class ProduitRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-public function findById(int $id): ?Produit
+
+
+    public function findBySearchTerm(?string $searchTerm): array
 {
-    return $this->find($id);
+    $queryBuilder = $this->createQueryBuilder('t');
+
+    if ($searchTerm) {
+        $queryBuilder->andWhere('t.id LIKE :searchTerm')
+                     ->setParameter('searchTerm', '%'.$searchTerm.'%');
+    }
+
+    return $queryBuilder->getQuery()->getResult();
+}
+public function findProduitById(string $productId): ?Produit
+{
+    return $this->findOneBy(['id' => $productId]);
+}
+
+public function findBytitle(?string $searchTerm): array
+{
+    $queryBuilder = $this->createQueryBuilder('t');
+
+    if ($searchTerm) {
+        $queryBuilder->andWhere('t.titre LIKE :searchTerm')
+                     ->setParameter('searchTerm', '%'.$searchTerm.'%');
+    }
+
+    return $queryBuilder->getQuery()->getResult();
 }
 }

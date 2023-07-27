@@ -17,10 +17,15 @@ use Symfony\Component\Security\Core\Security;
 class ProduitController extends AbstractController
 {
     #[Route('/', name: 'app_produit_index', methods: ['GET'])]
-    public function index(ProduitRepository $produitRepository): Response
+    public function index(Request $request, ProduitRepository $produitRepository): Response
+    
     {
+        $searchTerm = $request->query->get('q');
+        $produits = $produitRepository->findBySearchTerm($searchTerm);
         return $this->render('produit/index.html.twig', [
-            'produits' => $produitRepository->findAll(),
+            'produits' => $produits,
+            'searchTerm' => $searchTerm,
+            
         ]);
     }
 
@@ -103,4 +108,6 @@ class ProduitController extends AbstractController
     // Redirect back to the product page or any other desired route
     return $this->redirectToRoute('app_produit_show', ['id' => $produit->getId()]);
 }
+
+
 }

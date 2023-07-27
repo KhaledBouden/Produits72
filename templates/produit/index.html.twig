@@ -4,6 +4,16 @@
 
 {% block body %}
     <h1>Liste des Produits</h1>
+    
+
+       <div class="d-flex mb-4">
+        <form class="form-inline">
+            <div class="form-group px-1">
+                
+                <input type="text" class="form-control flex-grow-1 mx-2" id="searchTerm" name="q" value="{{ searchTerm }}" placeholder = "Rechercher" >
+            </div>
+        </form>
+    </div>
 
     <table class="table">
         <thead>
@@ -40,14 +50,13 @@
                     
                 </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
+        
         {% endfor %}
         </tbody>
     </table>
+    
     <div class="px-1">
     <a href="{{ path('app_produit_new') }}" class="btn btn-primary"><i class="bi bi-plus-lg px-1"></i>Ajouter</a>
     </div>
 {% endblock %}
+
